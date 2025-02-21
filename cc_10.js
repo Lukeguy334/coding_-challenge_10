@@ -1,3 +1,4 @@
+// Task 1 - Creating a product class
 class Product {
   constructor(name, id, price, stock) {
     this.name = name;
@@ -19,3 +20,28 @@ console.log(prod1.getDetails());
 prod1.updateStock(3);
 console.log(prod1.getDetails()); 
 // Expected output: "Product: Laptop, ID: 101, Price: $1200, Stock: 7"
+
+// Task 2 - Creating an Order Class
+class Order {
+    constructor(orderID, product, quantity) {
+        this.orderID = orderID;
+        this.product = product;
+        this.quantity = quantity;
+        this.totalPrice = this.product.price * this.quantity;
+
+        // Reduce stock
+        this.product.updateStock(this.quantity);
+    }
+
+    getOrderDetails() {
+        return `Order ID: ${this.orderID}, Product: ${this.product.name}, Quantity: ${this.quantity}, Total Price: ${this.totalPrice}`;
+    }
+}
+
+// Test cases
+const order1 = new Order(501, prod1, 2);
+console.log(order1.getOrderDetails()); 
+// Expected output: "Order ID: 501, Product: Laptop, Quantity: 2, Total Price: $2400"
+
+console.log(prod1.getDetails()); 
+// Expected output: "Product: Laptop, ID: 101, Price: $1200, Stock: 5" (Stock reduced)
